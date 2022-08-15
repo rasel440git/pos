@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
 
@@ -317,6 +318,12 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    @if(session('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{session('message')}}
+                        </div>
+                    @endif
 
                    @yield('main_contant');
 
