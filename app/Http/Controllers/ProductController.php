@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
-use App\Http\Requests\createUserReqeust;
-use App\Http\Requests\updateUserReqeust;
 use Illuminate\Http\Request;
+use App\Http\Requests\insertProductReqeust;
 use Illuminate\Support\Facades\Session;
-use App\Models\User;
-
-
-class usersController extends Controller
+use App\Models\Product;
+use App\Models\Category;
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +16,8 @@ class usersController extends Controller
      */
     public function index()
     {
-        $this->data['users']= User::all();
-        return view('users/users',$this->data);
+        $this->data['products']= Product::all();
+        return view ('products.products',$this->data);
     }
 
     /**
@@ -29,13 +26,12 @@ class usersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        
-        $this->data['groups']    = Group::ArrayForSelect();  
+    {
+        $this->data['categories']    = Category::ArrayForSelect();  
         $this->data['mode']      = 'create';   
-        $this->data['headline']  = 'Create New User';   
+        $this->data['headline']  = 'Add New Product';   
 
-        return view('users.form',$this->data);
+        return view('products.form',$this->data);
     }
 
     /**
@@ -44,13 +40,13 @@ class usersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(createUserReqeust $request)
+    public function store(insertProductReqeust $request)
     {
         $formData= $request->all();
-        if(User::create($formData)){
-            Session::flash('message', 'User Created Successfully!!!');
+        if(Product::create($formData)){
+            Session::flash('message', 'Product Insert Successfully!!!');
         };
-        return redirect()->to('users');
+        return redirect()->to('products');
     }
 
     /**
@@ -61,8 +57,8 @@ class usersController extends Controller
      */
     public function show($id)
     {
-        $this->data['user']=User::find($id);
-        return view('users.show',$this->data);
+        $this->data['product']=Product::find($id);
+        return view('products.show',$this->data);
     }
 
     /**
@@ -73,12 +69,12 @@ class usersController extends Controller
      */
     public function edit($id)
     {
-        $this->data['user']      = User::findOrFail($id);
-        $this->data['groups']    = Group::ArrayForSelect(); 
+        $this->data['product']  = Product::findOrFail($id);
+        $this->data['categories']    = Category::ArrayForSelect(); 
         $this->data['mode']      = 'edit';
         $this->data['headline']  = 'Update Information';
 
-        return view('users.form', $this->data);
+        return view('products.form', $this->data);
     }
 
     /**
@@ -88,23 +84,22 @@ class usersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(updateUserReqeust $request, $id)
+    public function update(insertProductReqeust $request, $id)
     {
         $data= $request->all();
 
-        $user= User::find($id);
-        $user->group_id = $data['group_id'];
-        $user->name     = $data['name'];
-        $user->email    = $data['email'];
-        $user->phone    = $data['phone'];
-        $user->address  = $data['address'];
+        $user= Product::find($id);
+        $user->category_id = $data['category_id'];
+        $user->title     = $data['title'];
+        $user->desc    = $data['desc'];
+        $user->cost_price    = $data['cost_price'];
+        $user->price  = $data['price'];
         
 
         if($user->save()){
-            Session::flash('message', 'User Updated Successfully!!!');
+            Session::flash('message', 'Product Updated Successfully!!!');
         };
-        return redirect()->to('users');
-
+        return redirect()->to('products');
 
     }
 
@@ -116,9 +111,9 @@ class usersController extends Controller
      */
     public function destroy($id)
     {
-        if(User::find($id)->delete() ){
-            Session::flash('message', 'User Deleted Successfully!!!');
+        if(Product::destroy($id) ){
+            Session::flash('message', 'Product Deleted Successfully!!!');
         };
-        return redirect()->to('users');
+        return redirect()->to('products');
     }
 }

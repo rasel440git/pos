@@ -17,7 +17,7 @@ class UserGroupController extends Controller
 
     public function create(){
 
-        return view('groups.create');
+        return view('groups.form');
 
     }
 

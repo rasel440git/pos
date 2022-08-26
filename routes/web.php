@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserGroupController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +23,24 @@ Route::get('/', function () {
 });
 
 
-Route::get('users',[UsersController::class,'index']);
+
 Route::get('groups',[UserGroupController::class,'index']);
 Route::get('groups/create',[UserGroupController::class,'create']);
 Route::post('groups',[UserGroupController::class,'store']);
 Route::delete('groups/{id}',[UserGroupController::class,'destroy']);
+
+
+//Route::resource('users',StudentController::class);
+Route::resource('users',UsersController::class);
+Route::resource('category',CategoryController::class,['except'=>['show']]);
+Route::resource('products',ProductController::class);
+
+
+//Route::resource('photos', PhotoController::class);
+
+// Route::get('users/{id}',[UsersController::class,'show']);
+// Route::get('users/create',[UsersController::class,'create']);
+// Route::post('users',[UsersController::class,'store']);
+// Route::get('users',[UsersController::class,'edit']);
+// Route::put('users/{id}',[UsersController::class,'update']);
+// Route::delete('users',[UsersController::class,'delete']);
