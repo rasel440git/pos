@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserGroupController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\loginController;
 
 
 /*
@@ -18,22 +19,30 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+    Route::get('login',[loginController::class,'login'])->name('login');
+    Route::post('confirm',[loginController::class,'authenticate'])->name('login.confirm');
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('dashboard', function () {
+        //return Auth::user();
+        return view('welcome');
+    });
+    Route::get('logout',[loginController::class,'logout'])->name('logout');  
+    
+    Route::get('groups',[UserGroupController::class,'index']);
+    Route::get('groups/create',[UserGroupController::class,'create']);
+    Route::post('groups',[UserGroupController::class,'store']);
+    Route::delete('groups/{id}',[UserGroupController::class,'destroy']);
+    
+    
+    //Route::resource('users',StudentController::class);
+    Route::resource('users',UsersController::class);
+    Route::resource('category',CategoryController::class,['except'=>['show']]);
+    Route::resource('products',ProductController::class);
+
 });
 
-
-
-Route::get('groups',[UserGroupController::class,'index']);
-Route::get('groups/create',[UserGroupController::class,'create']);
-Route::post('groups',[UserGroupController::class,'store']);
-Route::delete('groups/{id}',[UserGroupController::class,'destroy']);
-
-
-//Route::resource('users',StudentController::class);
-Route::resource('users',UsersController::class);
-Route::resource('category',CategoryController::class,['except'=>['show']]);
-Route::resource('products',ProductController::class);
 
 
 //Route::resource('photos', PhotoController::class);
