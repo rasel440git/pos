@@ -61,7 +61,9 @@ class usersController extends Controller
      */
     public function show($id)
     {
-        $this->data['user']=User::find($id);
+        $this->data['user']     = User::find($id);
+        $this->data['tab_manu'] = 'User info';
+
         return view('users.show',$this->data);
     }
 

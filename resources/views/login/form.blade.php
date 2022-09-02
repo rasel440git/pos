@@ -40,6 +40,7 @@
                                     <div class="form-group">
                                         {{ Form::password('password', ['class' => 'form-control form-control-user', 'id'=>'password', 'placeholder'=>'Enter Password']) }}
                                     </div>
+                                    
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" id="customCheck">
