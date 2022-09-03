@@ -2,6 +2,15 @@
 
 @section('user_contant')
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -15,37 +24,35 @@
                             
                             <thead>
                                 <tr>
-                                    <th>Chalan No</th>
+                                    
                                     <th>Customer</th>
+                                    <th>Collected By</th>
                                     <th>Date</th>
-                                    <th>Total</th>                                    
+                                    <th>Total</th>    
+                                    <th>Note</th>                                 
                                     <th class="text-right">Action</th>  
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Chalan No</th>
-                                    <th>Customer</th>
-                                    <th>Date</th>
-                                    <th>Total</th>                                    
-                                    <th class="text-right">Action</th>  
+                                    <th colspan="3" class="text-right">Total :</th>
+                                    <th>{{$user->receipts()->sum('amount')}}</th>  
+                                    <th colspan="2"></th> 
                                 </tr>
                             </tfoot>
                             <tbody>
                                 @foreach ($user->receipts as $receipt)
                                     
                                 
-                                <td>{{$user->name}}</td>
-                                <td>{{$receipt->date}}</td>                                        
+                                
+                                <td>{{$user->name}}</td>   
+                                <td>{{ optional($receipt->admin)->name}}</td>      
+                                <td>{{$receipt->date}}</td>                                   
                                 <td>{{$receipt->amount}}</td>
                                 <td>{{$receipt->note}}</td>
                                 <td class="text-right">
                                             
-                                            <form method="POST" action=" {{ route('users.destroy', ['user' => $user->id]) }} ">
-                                                <a class="btn btn-primary btn-sm" href="{{ route('users.show', ['user' => $user->id]) }}"> 
-                                                     <i class="fa fa-eye"></i> 
-                                                </a>
-        
+                                            <form method="POST" action=" {{ route('user.receipts.destroy', ['id' => $user->id, 'receipt_id' =>$receipt->id]) }} ">
                                                         
                                                 @csrf
                                                 @method('DELETE')
@@ -64,6 +71,8 @@
                     </div>
                 </div>
             </div>
-        <!-- DataTales Example -->
+        
+            
+    
 
 @endsection
