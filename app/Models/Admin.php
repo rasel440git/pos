@@ -55,4 +55,9 @@ class Admin extends Authenticatable
 
         return $this->hasMany(Receipt::class);
     }
+
+    public function sales(){
+
+        return $this->hasMany(SaleInvoice::class);
+    }
 }

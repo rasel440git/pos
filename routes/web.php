@@ -42,16 +42,30 @@ Route::group(['middleware'=>'auth'],function(){
     
     
     Route::resource('users',UsersController::class);
-    Route::get('users/{id}/sales',[UserSalesController::class,'index'])->name('user.sales');
-    Route::get('users/{id}/purchases',[UserPurchasesController::class,'index'])->name('user.purchases');
 
-    Route::get('users/{id}/payments',[UserPaymentsController::class,'index'])->name('user.payments');
-    Route::post('users/{id}/payments',[UserPaymentsController::class,'store'])->name('user.payments.store');
-    Route::delete('users/{id}/payments/{payment_id}',[UserPaymentsController::class,'destroy'])->name('user.payments.destroy');
+    Route::get('users/{id}/sales',                               [UserSalesController::class,'index'])->name('user.sales');
+    Route::post('users/{id}/invoices',                           [UserSalesController::class,'createInvoice'])->name('user.sales.store');
+    Route::get('users/{id}/invoices{invoice_id}',                [UserSalesController::class,'invoice'])->name('user.sales.invoice_details');
+    Route::delete('users/{id}/invoices{invoice_id}',             [UserSalesController::class,'destroy'])->name('user.sales.destroy');
+    Route::post('users/{id}/invoices{invoice_id}',               [UserSalesController::class,'addItem'])->name('user.sales.invoices.add_item');
+    Route::delete('users/{id}/invoices/{invoice_id}/{item_id}',  [UserSalesController::class,'destroy_item'])->name('user.sales.invoice.delete_item');
+
+    //Route for Purchases
+    Route::get('users/{id}/purchases',                            [UserPurchasesController::class,'index'])->name('user.purchases');
+    Route::post('users/{id}/purchases',                           [UserPurchasesController::class,'createInvoice'])->name('user.purchases.store');
+    Route::get('users/{id}/purchases{invoice_id}',                [UserPurchasesController::class,'invoice'])->name('user.purchases.invoice_details');
+    Route::delete('users/{id}/purchases{invoice_id}',             [UserPurchasesController::class,'destroy'])->name('user.purchases.destroy');
+    Route::post('users/{id}/purchases{invoice_id}',               [UserPurchasesController::class,'addItem'])->name('user.purchases.add_item');
+    Route::delete('users/{id}/purchases/{invoice_id}/{item_id}',  [UserPurchasesController::class,'destroy_item'])->name('user.purchases.delete_item');
+
+
+    Route::get('users/{id}/payments',                 [UserPaymentsController::class,'index'])->name('user.payments');
+    Route::post('users/{id}/payments/{invoice_id?}',  [UserPaymentsController::class,'store'])->name('user.payments.store');
+    Route::delete('users/{id}/payments/{payment_id}', [UserPaymentsController::class,'destroy'])->name('user.payments.destroy');
     
-    Route::get('users/{id}/receipts',[UserReceiptsController::class,'index'])->name('user.receipts');
-    Route::post('users/{id}/receipts',[UserReceiptsController::class,'store'])->name('user.receipts.store');
-    Route::delete('users/{id}/receipts/{receipt_id}',[UserReceiptsController::class,'destroy'])->name('user.receipts.destroy');
+    Route::get('users/{id}/receipts',                 [UserReceiptsController::class,'index'])->name('user.receipts');
+    Route::post('users/{id}/receipts/{invoice_id?}',  [UserReceiptsController::class,'store'])->name('user.receipts.store');
+    Route::delete('users/{id}/receipts/{receipt_id}', [UserReceiptsController::class,'destroy'])->name('user.receipts.destroy');
 
 
     Route::resource('category',CategoryController::class,['except'=>['show']]);
@@ -60,12 +74,3 @@ Route::group(['middleware'=>'auth'],function(){
 });
 
 
-
-//Route::resource('photos', PhotoController::class);
-
-// Route::get('users/{id}',[UsersController::class,'show']);
-// Route::get('users/create',[UsersController::class,'create']);
-// Route::post('users',[UsersController::class,'store']);
-// Route::get('users',[UsersController::class,'edit']);
-// Route::put('users/{id}',[UsersController::class,'update']);
-// Route::delete('users',[UsersController::class,'delete']);

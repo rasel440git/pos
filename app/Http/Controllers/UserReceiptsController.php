@@ -24,17 +24,29 @@ class UserReceiptsController extends Controller
          return view('users.receipts.receipts',$this->data);
     }
 
-    public function store (ReceiptRequest $request, $user_id){
+    public function store (ReceiptRequest $request, $user_id, $invoice_id = null){
 
         $formData= $request->all();
         $formData['user_id']= $user_id;
         $formData['admin_id']= Auth::id();
+        
+        if($invoice_id){
+            $formData['sale_invoice_id']= $invoice_id;
+        }
 
         if(Receipt::create($formData)){
             Session::flash('message', 'Receipt Insert Successfully!!!');
         };
 
-        return redirect()->route('user.receipts',['id' => $user_id]);
+        if($invoice_id){
+
+            return redirect()->route('user.sales.invoice_details', ['id' =>$user_id, 'invoice_id' => $invoice_id]);
+        } else{
+
+            return redirect()->route('user.receipts',['id' => $user_id]);
+            
+        }
+
     }
 
 
