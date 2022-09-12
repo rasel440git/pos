@@ -47,6 +47,7 @@
                         
                         <a class="collapse-item" href="{{url('groups') }}">Groups</a>
                         <a class="collapse-item" href="{{url('users') }}">Users</a>
+                        
                     </div>
                 </div>
             </li>
@@ -64,6 +65,7 @@
                         
                         <a class="collapse-item" href="{{url('category') }}">Category</a>
                         <a class="collapse-item" href="{{url('products') }}">Products</a>
+                        <a class="collapse-item" href="{{route('stocks') }}">Stocks</a>
                     </div>
                 </div>
             </li>

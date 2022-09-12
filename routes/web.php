@@ -9,6 +9,7 @@ use App\Http\Controllers\UserSalesController;
 use App\Http\Controllers\UserPurchasesController;
 use App\Http\Controllers\UserPaymentsController;
 use App\Http\Controllers\UserReceiptsController;
+use App\Http\Controllers\ProductStockController;
 use App\Http\Controllers\Auth\loginController;
 
 
@@ -70,6 +71,8 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::resource('category',CategoryController::class,['except'=>['show']]);
     Route::resource('products',ProductController::class);
+    Route::get('stocks', [ProductStockController::class,'index'])->name('stocks');
+
 
 });
 

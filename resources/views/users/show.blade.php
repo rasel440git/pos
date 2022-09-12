@@ -13,11 +13,11 @@
                             Total Sales</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             <?php
-                                $total= 0;
+                                $totalSale= 0;
                                 foreach($user->sales as $sale){
-                                    $total+= $sale->items()->sum('total');
+                                    $totalSale+= $sale->items()->sum('total');
                                 }
-                                echo $total;
+                                echo $totalSale;
                             ?>
                         </div>
                     </div>
@@ -39,11 +39,11 @@
                             Total Purchase</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             <?php
-                                $total= 0;
+                                $totalPurchase = 0;
                                 foreach($user->purchases as $purchase){
-                                    $total+= $purchase->items()->sum('total');
+                                    $totalPurchase+= $purchase->items()->sum('total');
                                 }
-                                echo $total;
+                                echo $totalPurchase;
                             ?>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             Total Receipts</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$user->receipts->sum('amount')}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalReceipt = $user->receipts->sum('amount')}}</div>
                     </div>
                     
                 </div>
@@ -77,7 +77,31 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             Total Payments</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$user->payments->sum('amount')}}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalPayment = $user->payments->sum('amount')}}</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+        <?php 
+            $totalBalance = ($totalPurchase+$totalReceipt) - ($totalSale+$totalPayment)
+        ?>    
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-2 col-md-4 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Balance</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            @if($totalBalance>= 0)
+                            {{$totalBalance}}
+                            @else
+                                0                            
+                            @endif
+                        </div>
                     </div>
                     
                 </div>
@@ -92,8 +116,12 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Payments</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$user->payments->sum('amount')}}</div>
+                            Total Due</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            @if($totalBalance<= 0)
+                            {{$totalBalance}}
+                            @endif
+                        </div>
                     </div>
                     
                 </div>

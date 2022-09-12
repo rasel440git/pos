@@ -8,19 +8,19 @@
         </div>
         
         <div class="col-md-8 text-right">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newSale">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newSale">
                     <i class="fa fa-plus"></i> New Sale
                 </button>
 
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newPurchase">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newPayment">
+                  <i class="fa fa-plus"></i> New Payment
+              </button>
+
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newPurchase">
                     <i class="fa fa-plus"></i> New Purchase
                 </button>
                 
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newPayment">
-                    <i class="fa fa-plus"></i> New Payment
-                </button>
-
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#newReceipt">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newReceipt">
                     <i class="fa fa-plus"></i> New Receipt
                 </button>
 
