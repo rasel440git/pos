@@ -9,6 +9,12 @@ use App\Models\Product;
 use App\Models\Category;
 class ProductController extends Controller
 {
+    public function __construct(){
+       
+        $this->data['main_manu']='Products';
+        $this->data['sub_manu']='Products';
+    }
+
     /**
      * Display a listing of the resource.
      *

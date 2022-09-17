@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Auth;
 class UserPurchasesController extends Controller
 {
     public function __construct(){
-
+        parent::__construct();
+        $this->data['main_manu'] = 'Users';
+        $this->data['sub_manu'] = 'Users';
         $this->data['tab_manu'] = 'Purchases';
     }
 

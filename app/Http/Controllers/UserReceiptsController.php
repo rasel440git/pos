@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 class UserReceiptsController extends Controller
 {
     public function __construct(){
-
+        parent::__construct();
+        $this->data['main_manu'] = 'Users';
+        $this->data['sub_manu'] = 'Users';
         $this->data['tab_manu'] = 'Receipts';
     }
     public function index($id){

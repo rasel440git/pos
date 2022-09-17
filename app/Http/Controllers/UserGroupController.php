@@ -7,7 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Group;
 
 class UserGroupController extends Controller
-{
+{   
+    public function __construct(){
+        
+        $this->data['main_manu']='Users';
+        $this->data['sub_manu']='Groups';
+    }
+
     public function index(){
 
         $this->data['groups'] = Group::all();
@@ -17,7 +23,7 @@ class UserGroupController extends Controller
 
     public function create(){
 
-        return view('groups.form');
+        return view('groups.create', $this->data);
 
     }
 

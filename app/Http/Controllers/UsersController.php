@@ -11,7 +11,12 @@ use App\Models\User;
 
 
 class usersController extends Controller
-{
+{   
+    public function __construct(){
+        parent::__construct();
+        $this->data['main_manu']='Users';
+        $this->data['sub_manu']='Users';
+    }
     /**
      * Display a listing of the resource.
      *

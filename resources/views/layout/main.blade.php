@@ -14,7 +14,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Mini POS</div>
+                <div class="sidebar-brand-text mx-3">NJ Mini POS</div>
             </a>
 
             <!-- Divider -->
@@ -36,17 +36,17 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item @if($main_manu == 'Users') active @endif"">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>Users</span>
                 </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseOne" class="collapse @if($main_manu == 'Users') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="{{url('groups') }}">Groups</a>
-                        <a class="collapse-item" href="{{url('users') }}">Users</a>
+                        <a class="collapse-item @if($sub_manu == 'Groups') active @endif" href="{{url('groups') }}">Groups</a>
+                        <a class="collapse-item @if($sub_manu == 'Users') active @endif" href="{{url('users') }}">Users</a>
                         
                     </div>
                 </div>
@@ -54,18 +54,37 @@
 
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item @if($main_manu == 'Products') active @endif">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-fw fa-bars"></i>
                     <span>Products</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse @if($main_manu == 'Products') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="{{url('category') }}">Category</a>
-                        <a class="collapse-item" href="{{url('products') }}">Products</a>
-                        <a class="collapse-item" href="{{route('stocks') }}">Stocks</a>
+                        <a class="collapse-item @if($sub_manu == 'Category') active @endif" href="{{url('category') }}">Category</a>
+                        <a class="collapse-item @if($sub_manu == 'Products') active @endif" href="{{url('products') }}">Products</a>
+                        <a class="collapse-item @if($sub_manu == 'Stocks') active @endif" href="{{route('stocks') }}">Stocks</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item @if($main_manu == 'Reports') active @endif">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports"
+                    aria-expanded="true" aria-controls="collapseReports">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseReports" class="collapse @if($main_manu == 'Reports') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        
+                        <a class="collapse-item @if($sub_manu == 'Sales') active @endif" href="{{route('reports.sales') }}">Sales</a>
+                        <a class="collapse-item @if($sub_manu == 'Purchases') active @endif" href="{{route('reports.purchases') }}">Purchases</a>
+                        <a class="collapse-item @if($sub_manu == 'Payments') active @endif" href="{{route('reports.payments') }}">Payments</a>
+                        <a class="collapse-item @if($sub_manu == 'Receipts') active @endif" href="{{route('reports.receipts') }}">Receipts</a>
+
                     </div>
                 </div>
             </li>

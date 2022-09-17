@@ -7,9 +7,7 @@
         <div class="col-md-6">
             <h2>User List</h2>
         </div>
-        <div class="col-md-6 text-right">
-            <a class="btn btn-info" href="{{route('products.create')}}"><i class="fa fa-plus"></i> New Product</a>
-        </div>
+        
 
     </div>
 
@@ -29,23 +27,12 @@
                             <th>Id</th>
                             <th>Category</th>
                             <th>Title</th>
-                            <th>Desc</th>
-                            <th>Cost Price</th>
-                            <th>Price</th>
-                            <th class="text-right">Action</th>  
+                            <th>Purchase </th>
+                            <th>Sale</th>
+                            <th>Stocks</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Category</th>
-                            <th>Title</th>
-                            <th>Desc</th>
-                            <th>Cost Price</th>
-                            <th>Price</th>
-                            <th class="text-right">Action</th>                            
-                        </tr>
-                    </tfoot>
+                    
                     <tbody>
                         @foreach ($products as $product)
                             
@@ -54,33 +41,25 @@
                                 <td>{{$product->id}}</td>
                                 <td>{{$product->category->title }}</td>
                                 <td>{{$product->title}}</td>
-                                <td>{{$product->desc}}</td>
-                                <td>{{$product->cost_price}}</td>
-                                <td>{{$product->price}}</td>
-                                <td class="text-right">
-                                    
-                                    <form method="POST" action=" {{ route('products.destroy', ['product' => $product->id]) }} ">
-                                        <a class="btn btn-primary btn-sm" href="{{ route('products.show', ['product' => $product->id]) }}"> 
-                                             <i class="fa fa-eye"></i> 
-                                        </a>
-
-                                        <a class="btn btn-primary btn-sm" href="{{ route('products.edit', ['product' => $product->id]) }}"> 
-                                            <i class="fa fa-edit"></i> 
-                                       </a>
-
-                                        @csrf
-                                        @method('DELETE')
-                                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"> 
-                                            <i class="fa fa-trash"></i>  
-                                        </button>	
-                                    </form>
-                                    
-                                </td>                                
+                                <td>{{$purchase = $product->purchaseItem()->sum('quantity')}}</td>
+                                <td>{{$sale = $product->saleItem()->sum('quantity')}}</td>
+                                <td>{{$purchase-$sale}}</td>
+                                                              
                             </tr>
                         @endforeach
                         
                         
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>Purchase </th>
+                            <th>Sale</th>
+                            <th>Stocks</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

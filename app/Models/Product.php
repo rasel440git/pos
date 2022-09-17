@@ -13,6 +13,14 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function purchaseItem(){
+        return $this->hasMany(PurchaseItem::class);
+    }
+
+    public function saleItem(){
+        return $this->hasMany(SaleItem::class);
+    }
+
     //greeting array for select option
     public static function ArrayForSelect(){
 

@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Category;
 
 class CategoryController extends Controller
-{
+{   
+    public function __construct(){
+        parent::__construct();
+        $this->data['main_manu']='Products';
+        $this->data['sub_manu']='Category';
+    }
+
     /**
      * Display a listing of the resource.
      *
