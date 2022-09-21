@@ -114,21 +114,21 @@
                       <div class="form-group row">
                         <label for="amount" class="col-sm-3 col-form-label text-right">Unit Price <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                          {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price','required', 'placeholder' => 'Unit price' ]) }}
+                          {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price', 'onkeyup' => 'getTotal()', 'required', 'placeholder' => 'Unit price' ]) }}
                         </div>
                       </div>
     
                       <div class="form-group row">
                         <label for="note" class="col-sm-3 col-form-label text-right">Quantity <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                          {{ Form::text('quantity', NULL, [ 'class'=>'form-control', 'id' => 'quantity','required', 'placeholder' => 'Quantity' ]) }}
+                          {{ Form::text('quantity', NULL, [ 'class'=>'form-control', 'id' => 'quantity','onkeyup' => 'getTotal()', 'required', 'placeholder' => 'Quantity' ]) }}
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="note" class="col-sm-3 col-form-label text-right">Total <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                          {{ Form::text('total', NULL, [ 'class'=>'form-control', 'id' => 'total', 'placeholder' => 'Total' ]) }}
+                          {{ Form::text('total', NULL, [ 'class'=>'form-control', 'id' => 'total',  'placeholder' => 'Total' ]) }}
                         </div>
                       </div>
     
@@ -161,21 +161,21 @@
                     <div class="form-group row">
                         <label for="date" class="col-sm-3 col-form-label"> Date <span class="text-danger">*</span> </label>
                         <div class="col-sm-9">
-                          {{ Form::date('date', NULL, [ 'class'=>'form-control', 'id' => 'date', 'placeholder' => 'Date', 'required' ]) }}
+                          {{ Form::date('date', NULL, [ 'class'=>'form-control', 'placeholder' => 'Date', 'required' ]) }}
                         </div>
                       </div>
     
                       <div class="form-group row">
                         <label for="amount" class="col-sm-3 col-form-label">Amount <span class="text-danger">*</span>  </label>
                         <div class="col-sm-9">
-                          {{ Form::text('amount', NULL, [ 'class'=>'form-control', 'id' => 'amount', 'placeholder' => 'Amount', 'required' ]) }}
+                          {{ Form::text('amount', NULL, [ 'class'=>'form-control', 'placeholder' => 'Amount', 'required' ]) }}
                         </div>
                       </div>
     
                       <div class="form-group row">
                         <label for="note" class="col-sm-3 col-form-label">Note </label>
                         <div class="col-sm-9">
-                          {{ Form::textarea('note', NULL, [ 'class'=>'form-control', 'id' => 'note', 'rows' => '3', 'placeholder' => 'Note' ]) }}
+                          {{ Form::textarea('note', NULL, [ 'class'=>'form-control', 'rows' => '3', 'placeholder' => 'Note' ]) }}
                         </div>
                       </div>
     
@@ -190,5 +190,19 @@
 
         </div>
     </div>  
+
+    <script type="text/javascript">
+        function getTotal(){
+
+          var price = document.getElementById("price").value;
+          var quantity = document.getElementById("quantity").value;
+          if(price && quantity){
+            var total = price*quantity;
+            document.getElementById("total").value = total;
+            //console.log(Total);
+          }
+        }
+    </script>
+
 
 @stop

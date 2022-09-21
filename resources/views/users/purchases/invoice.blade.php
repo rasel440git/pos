@@ -114,14 +114,14 @@
                       <div class="form-group row">
                         <label for="amount" class="col-sm-3 col-form-label text-right">Unit Price <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                          {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price','required', 'placeholder' => 'Unit price' ]) }}
+                          {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price','required', 'onkeyup' => 'getTotal()', 'placeholder' => 'Unit price' ]) }}
                         </div>
                       </div>
     
                       <div class="form-group row">
                         <label for="note" class="col-sm-3 col-form-label text-right">Quantity <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                          {{ Form::text('quantity', NULL, [ 'class'=>'form-control', 'id' => 'quantity','required', 'placeholder' => 'Quantity' ]) }}
+                          {{ Form::text('quantity', NULL, [ 'class'=>'form-control', 'id' => 'quantity', 'onkeyup' => 'getTotal()', 'required', 'placeholder' => 'Quantity' ]) }}
                         </div>
                       </div>
 
@@ -190,5 +190,16 @@
 
         </div>
     </div>  
+    <script type="text/javascript">
+      function getTotal(){
 
+        var price = document.getElementById("price").value;
+        var quantity = document.getElementById("quantity").value;
+        if(price && quantity){
+          var total = price*quantity;
+          document.getElementById("total").value = total;
+          //console.log(Total);
+        }
+      }
+  </script>
 @stop

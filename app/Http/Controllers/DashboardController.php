@@ -12,7 +12,12 @@ use App\Models\Receipt;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
-{
+{   
+    public function __construct(){
+        parent::__construct();
+        $this->data['main_manu']='Dashboard';
+    }
+
     public function index(){
 
         $this->data['TotalUsers']      = User::count('id');
@@ -21,7 +26,7 @@ class DashboardController extends Controller
         $this->data['TotalPurchases']  = PurchaseItem::sum('total');
         $this->data['TotalPayments']   = Payment::sum('amount');
         $this->data['TotalReceipt']    = Receipt::sum('amount');
-        $this->data['TotalStocks']    = PurchaseItem::sum('quantity') - SaleItem::sum('quantity');
+        $this->data['TotalStocks']     = PurchaseItem::sum('quantity') - SaleItem::sum('quantity');
 
         return view('dashboard',$this->data);
     }

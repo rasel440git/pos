@@ -7,12 +7,13 @@ use App\Http\Requests\insertProductReqeust;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use App\Models\Category;
+
 class ProductController extends Controller
 {
     public function __construct(){
        
         $this->data['main_manu']='Products';
-        $this->data['sub_manu']='Products';
+        $this->data['sub_manu'] ='Products';
     }
 
     /**
@@ -52,6 +53,7 @@ class ProductController extends Controller
         if(Product::create($formData)){
             Session::flash('message', 'Product Insert Successfully!!!');
         };
+
         return redirect()->to('products');
     }
 
@@ -64,6 +66,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $this->data['product']=Product::find($id);
+
         return view('products.show',$this->data);
     }
 
@@ -75,10 +78,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $this->data['product']  = Product::findOrFail($id);
-        $this->data['categories']    = Category::ArrayForSelect(); 
-        $this->data['mode']      = 'edit';
-        $this->data['headline']  = 'Update Information';
+        $this->data['product']      = Product::findOrFail($id);
+        $this->data['categories']   = Category::ArrayForSelect(); 
+        $this->data['mode']         = 'edit';
+        $this->data['headline']     = 'Update Information';
 
         return view('products.form', $this->data);
     }
@@ -95,16 +98,18 @@ class ProductController extends Controller
         $data= $request->all();
 
         $user= Product::find($id);
-        $user->category_id = $data['category_id'];
-        $user->title     = $data['title'];
-        $user->desc    = $data['desc'];
-        $user->cost_price    = $data['cost_price'];
-        $user->price  = $data['price'];
+        $user->category_id  = $data['category_id'];
+        $user->title        = $data['title'];
+        $user->desc         = $data['desc'];
+        $user->cost_price   = $data['cost_price'];
+        $user->price        = $data['price'];
+        $user->has_stock    = $data['has_stock'];
         
 
         if($user->save()){
             Session::flash('message', 'Product Updated Successfully!!!');
         };
+
         return redirect()->to('products');
 
     }
@@ -120,6 +125,7 @@ class ProductController extends Controller
         if(Product::destroy($id) ){
             Session::flash('message', 'Product Deleted Successfully!!!');
         };
+        
         return redirect()->to('products');
     }
 }

@@ -18,7 +18,7 @@ class UserPurchasesController extends Controller
 {
     public function __construct(){
         parent::__construct();
-        $this->data['main_manu'] = 'Users';
+        $this->data['main_manu']= 'Users';
         $this->data['sub_manu'] = 'Users';
         $this->data['tab_manu'] = 'Purchases';
     }
@@ -44,11 +44,11 @@ class UserPurchasesController extends Controller
 
     public function invoice($user_id, $invoice_id){
     
-         $this->data['user']     = User::findOrFail($user_id);
-         $this->data['invoice']  = PurchaseInvoice::findOrFail($invoice_id);
-         $this->data['totalPayable']  =  $this->data['invoice']->items()->sum('total');
-         $this->data['totalPaid']  = $this->data['invoice']->payments()->sum('amount');
-         $this->data['products'] = Product::ArrayForSelect();
+         $this->data['user']          = User::findOrFail($user_id);
+         $this->data['invoice']       = PurchaseInvoice::findOrFail($invoice_id);
+         $this->data['totalPayable']  = $this->data['invoice']->items()->sum('total');
+         $this->data['totalPaid']     = $this->data['invoice']->payments()->sum('amount');
+         $this->data['products']      = Product::ArrayForSelect();
 
          return view('users.purchases.invoice', $this->data);
     }
@@ -78,6 +78,7 @@ class UserPurchasesController extends Controller
         if(PurchaseInvoice::destroy($invoice_id)){
             Session::flash('message', 'Invoice Deleted Successfully!!!');
         };
+        
         return redirect()->route('user.purchases', ['id' =>$user_id]);
 
     }

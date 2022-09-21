@@ -10,7 +10,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Sales</div>
+                            Sales</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             <?php
                                 $totalSale= 0;
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Purchase</div>
+                            Purchase</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             <?php
                                 $totalPurchase = 0;
@@ -47,7 +47,9 @@
                             ?>
                         </div>
                     </div>
-                    
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,11 +62,14 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Receipts</div>
+                            Receipts</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalReceipt = $user->receipts->sum('amount')}}</div>
                     </div>
-                    
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -76,10 +81,12 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Payments</div>
+                            Payments</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalPayment = $user->payments->sum('amount')}}</div>
                     </div>
-                    
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -94,7 +101,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Balance</div>
+                            Balance</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             @if($totalBalance>= 0)
                             {{$totalBalance}}
@@ -103,7 +110,9 @@
                             @endif
                         </div>
                     </div>
-                    
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,14 +125,16 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Total Due</div>
+                            Due</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             @if($totalBalance<= 0)
                             {{$totalBalance}}
                             @endif
                         </div>
                     </div>
-                    
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
                 </div>
             </div>
         </div>

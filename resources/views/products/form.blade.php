@@ -48,6 +48,10 @@
                              <div class="form-group">
                                {{ Form::text('price',NULL, ['class' => 'form-control', 'id'=>'price', 'placeholder'=>'Price']) }}
                            </div>
+
+                           <div class="form-group">
+                            {{ Form::select('has_stock',['1'=>'Yes', '2'=>'No'],NULL, ['class' => 'form-control', 'id'=>'category_id', 'placeholder'=>'Has Stock?']) }}
+                           </div>
                            
                             
                             <button type="submit" class="btn btn-primary">Submit</button>

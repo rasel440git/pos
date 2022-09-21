@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
 use App\Http\Requests\createUserReqeust;
 use App\Http\Requests\updateUserReqeust;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use App\Models\Group;
 use App\Models\User;
+use App\Models\SaleItem;
 
 
 class usersController extends Controller
@@ -15,7 +17,7 @@ class usersController extends Controller
     public function __construct(){
         parent::__construct();
         $this->data['main_manu']='Users';
-        $this->data['sub_manu']='Users';
+        $this->data['sub_manu'] ='Users';
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +30,8 @@ class usersController extends Controller
         return view('users/users',$this->data);
     }
 
-    /**
+
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

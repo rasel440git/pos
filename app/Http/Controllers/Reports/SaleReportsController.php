@@ -11,7 +11,7 @@ class SaleReportsController extends Controller
     public function __construct(){
         parent::__construct();
         $this->data['main_manu']='Reports';
-        $this->data['sub_manu']='Sales';
+        $this->data['sub_manu'] ='Sales';
     }
 
     public function index(Request $request){
@@ -23,6 +23,7 @@ class SaleReportsController extends Controller
                                         ->join('sale_invoices','sale_items.sale_invoice_id', '=', 'sale_invoices.id')
                                         ->whereBetween('sale_invoices.date',[$this->data['start_date'], $this->data['end_date']])
                                         ->get();
+                                        
         return view('reports.sales', $this->data);
     }
 }

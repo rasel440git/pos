@@ -11,12 +11,13 @@ class UserGroupController extends Controller
     public function __construct(){
         
         $this->data['main_manu']='Users';
-        $this->data['sub_manu']='Groups';
+        $this->data['sub_manu'] ='Groups';
     }
 
     public function index(){
 
         $this->data['groups'] = Group::all();
+
         return view('groups.groups',$this->data);
 
     }
@@ -32,6 +33,7 @@ class UserGroupController extends Controller
         if(Group::create($formData)){
             Session::flash('message', 'Group Created Successfully!!!');
         };
+
         return redirect()->to('groups');
     }
 
@@ -39,6 +41,7 @@ class UserGroupController extends Controller
         if(Group::find($id)->delete() ){
             Session::flash('message', 'Group Deleted Successfully!!!');
         }
+        
         return redirect()->to('groups');
     }
 }

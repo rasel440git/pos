@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function __construct(){
         parent::__construct();
         $this->data['main_manu']='Products';
-        $this->data['sub_manu']='Category';
+        $this->data['sub_manu'] ='Category';
     }
 
     /**
@@ -23,6 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         $this->data['categories']= Category::all();
+
         return view('category/categories',$this->data);
     }
 
@@ -35,6 +36,7 @@ class CategoryController extends Controller
     {
         $this->data['headline']  ="Add New Categries";
         $this->data['mode']      = 'create'; 
+
         return view('category/form',$this->data);
     }
 
@@ -50,6 +52,7 @@ class CategoryController extends Controller
         if(Category::create($formData)){
             Session::flash('message', $formData['title'].' Created Successfully!!!');
         };
+
         return redirect()->to('category');
     }
 
@@ -96,6 +99,7 @@ class CategoryController extends Controller
         if($category->save()){
             Session::flash('message', 'Category Updated Successfully!!!');
         };
+
         return redirect()->to('category');
     }
 
@@ -110,6 +114,7 @@ class CategoryController extends Controller
         if(Category::find($id)->delete() ){
             Session::flash('message', 'Category Deleted Successfully!!!');
         };
+        
         return redirect()->to('category');
     }
 }

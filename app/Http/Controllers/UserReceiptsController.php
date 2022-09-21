@@ -14,7 +14,7 @@ class UserReceiptsController extends Controller
 {
     public function __construct(){
         parent::__construct();
-        $this->data['main_manu'] = 'Users';
+        $this->data['main_manu']= 'Users';
         $this->data['sub_manu'] = 'Users';
         $this->data['tab_manu'] = 'Receipts';
     }
@@ -29,8 +29,8 @@ class UserReceiptsController extends Controller
     public function store (ReceiptRequest $request, $user_id, $invoice_id = null){
 
         $formData= $request->all();
-        $formData['user_id']= $user_id;
-        $formData['admin_id']= Auth::id();
+        $formData['user_id']    = $user_id;
+        $formData['admin_id']   = Auth::id();
         
         if($invoice_id){
             $formData['sale_invoice_id']= $invoice_id;

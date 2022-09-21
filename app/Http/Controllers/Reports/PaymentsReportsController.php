@@ -11,7 +11,7 @@ class PaymentsReportsController extends Controller
     public function __construct(){
         parent::__construct();
         $this->data['main_manu']='Reports';
-        $this->data['sub_manu']='Payments';
+        $this->data['sub_manu'] ='Payments';
     }
 
     public function index(Request $request){

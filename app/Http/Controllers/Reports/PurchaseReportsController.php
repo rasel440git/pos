@@ -11,7 +11,7 @@ class PurchaseReportsController extends Controller
     public function __construct(){
         parent::__construct();
         $this->data['main_manu']='Reports';
-        $this->data['sub_manu']='Purchases';
+        $this->data['sub_manu'] ='Purchases';
     }
 
     public function index(Request $request){

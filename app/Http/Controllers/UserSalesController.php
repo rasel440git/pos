@@ -17,7 +17,7 @@ class UserSalesController extends Controller
     
     public function __construct(){
         parent::__construct();
-        $this->data['main_manu'] = 'Users';
+        $this->data['main_manu']= 'Users';
         $this->data['sub_manu'] = 'Users';
         $this->data['tab_manu'] = 'Sales';
     }
@@ -32,8 +32,8 @@ class UserSalesController extends Controller
     public function createInvoice(InvoiceRequest $request, $user_id){
 
         $formData= $request->all();
-        $formData['user_id']= $user_id;
-        $formData['admin_id']= Auth::id();
+        $formData['user_id']    = $user_id;
+        $formData['admin_id']   = Auth::id();
 
         $invoice= SaleInvoice::create($formData);
 
@@ -66,6 +66,7 @@ class UserSalesController extends Controller
         if(SaleItem::destroy($item_id)){
             Session::flash('message', 'Sale Item Deleted Successfully!!!');
         };
+
         return redirect()->route('user.sales.invoice_details', ['id' =>$user_id, 'invoice_id' =>$invoice_id]);
 
     }
@@ -74,6 +75,7 @@ class UserSalesController extends Controller
         if(SaleInvoice::destroy($invoice_id)){
             Session::flash('message', 'Invoice Deleted Successfully!!!');
         };
+        
         return redirect()->route('user.sales', ['id' =>$user_id]);
 
     }
