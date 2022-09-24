@@ -28,7 +28,8 @@ class insertProductReqeust extends FormRequest
             'title'       => 'required|string',
             'desc'        => 'required|string',
             'cost_price'  => 'numeric',
-            'price'       => 'numeric'
+            'price'       => 'numeric',
+            'has_stock'       => 'required'
             
         ];
     }

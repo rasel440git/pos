@@ -67,7 +67,10 @@
                                         <a class="btn btn-primary btn-sm" href="{{ route('users.edit', ['user' => $user->id]) }}"> 
                                             <i class="fa fa-edit"></i> 
                                        </a>
-                                       @if($user->sales()->count() ==0)
+                                       @if($user->sales()->count() ==0 &&
+                                       $user->purchases()->count() ==0 &&
+                                        $user->payments()->count() ==0 && 
+                                        $user->receipts()->count() ==0)
 
                                             @csrf
                                             @method('DELETE')
@@ -75,7 +78,7 @@
                                                 <i class="fa fa-trash"></i>  
                                             </button>	
 
-                                       @endif 
+                                    @endif 
                                     </form>
                                     
                                 </td>                                
